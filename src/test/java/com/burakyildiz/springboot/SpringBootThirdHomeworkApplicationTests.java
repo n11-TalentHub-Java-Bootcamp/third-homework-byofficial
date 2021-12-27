@@ -1,0 +1,13 @@
+package com.burakyildiz.springboot;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class SpringBootThirdHomeworkApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
