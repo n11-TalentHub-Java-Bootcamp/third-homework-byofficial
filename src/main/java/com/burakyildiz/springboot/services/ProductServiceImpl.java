@@ -1,6 +1,8 @@
 package com.burakyildiz.springboot.services;
 
+import com.burakyildiz.springboot.dto.ProductDetailDto;
 import com.burakyildiz.springboot.entities.Product;
+import com.burakyildiz.springboot.mapper.ProductMapper;
 import com.burakyildiz.springboot.services.entityService.ProductEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +33,25 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void delete(String id) {
         productEntityService.deleteById(id);
+    }
+
+    @Override
+    public List<ProductDetailDto> findAllProductByCategoryId(String categoryId) {
+
+        List<Product> productList = productEntityService.findAllProductByCategoryId(categoryId);
+
+        List<ProductDetailDto> productDetailDtoList = ProductMapper.INSTANCE.convertAllProductListToProductDetailDtoList(productList);
+
+        return productDetailDtoList;
+    }
+
+    @Override
+    public ProductDetailDto findProductDetailDtoById(String id) {
+
+        Product product = productEntityService.findById(id);
+
+        ProductDetailDto productDetailDto = ProductMapper.INSTANCE.convertProductToProductDetailDto(product);
+
+        return productDetailDto;
     }
 }

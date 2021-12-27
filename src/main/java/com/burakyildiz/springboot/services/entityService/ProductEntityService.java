@@ -38,4 +38,8 @@ public class ProductEntityService {
     public Product save(Product product){
         return productRepository.save(product);
     }
+
+    public List<Product> findAllProductByCategoryId(String categoryId) {
+        return productRepository.findAllByCategoryId(categoryId);
+    }
 }

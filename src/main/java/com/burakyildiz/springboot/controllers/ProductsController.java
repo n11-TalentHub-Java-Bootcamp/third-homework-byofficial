@@ -1,5 +1,6 @@
 package com.burakyildiz.springboot.controllers;
 
+import com.burakyildiz.springboot.dto.ProductDetailDto;
 import com.burakyildiz.springboot.entities.Product;
 import com.burakyildiz.springboot.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,16 @@ public class ProductsController {
     @GetMapping("/{id}")
     public Product findById(@PathVariable String id) {
         return productService.findById(id);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ProductDetailDto findProductDetailDtoById(@PathVariable String id){
+        return productService.findProductDetailDtoById(id);
+    }
+
+    @GetMapping("categories/{categoryId}")
+    public List<ProductDetailDto> findAllProductByCategoryId(@PathVariable String categoryId){
+        return productService.findAllProductByCategoryId(categoryId);
     }
 
     @PostMapping("")
