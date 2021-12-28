@@ -41,7 +41,14 @@ public class UsersController {
     //[GET] https://localhost:8080/api/users/{id}
     @GetMapping("/{id}")
     public User findById(@PathVariable String id) {
-        return userService.findById(id);
+        User user = userService.findById(id);
+
+        //Belirtilen id ait kullanıcı sistemde yoksa
+        if (user == null) {
+            throw new UserNotFoundException("User not found! ID: " + id);
+        }
+
+        return user;
     }
 
     //[POST] https://localhost:8080/api/users/
@@ -61,9 +68,16 @@ public class UsersController {
         return ResponseEntity.created(uri).build();
     }
 
-
+    //[DELETE] https://localhost:8080/api/users/{id}
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
+        User user = userService.findById(id);
+
+        //Belirtilen id ait kullanıcı sistemde yoksa
+        if (user == null) {
+            throw new UserNotFoundException("User not found! ID: " + id);
+        }
+
         userService.delete(id);
     }
 }
