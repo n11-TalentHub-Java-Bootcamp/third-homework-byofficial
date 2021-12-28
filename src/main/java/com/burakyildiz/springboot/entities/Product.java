@@ -9,7 +9,7 @@ import java.util.Date;
 @Document("product")
 public class Product {
     @Id
-    private Long id;
+    private String id;
     private String productName;
     private BigDecimal price;
     private Date createdAt;
@@ -18,7 +18,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String productName, BigDecimal price, Date createdAt, String categoryId) {
+    public Product(String id, String productName, BigDecimal price, Date createdAt, String categoryId) {
         this.id = id;
         this.productName = productName;
         this.price = price;
@@ -26,11 +26,11 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

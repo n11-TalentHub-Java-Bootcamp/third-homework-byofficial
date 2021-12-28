@@ -1,29 +1,13 @@
-package com.burakyildiz.springboot.entities;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.burakyildiz.springboot.dto;
 
 import java.util.Date;
 
-@Document("product_review")
-public class ProductReview {
-    @Id
+public class ProductReviewDto {
     private String id;
     private String review;
     private Date reviewDate;
     private String productId;
     private String userId;
-
-    public ProductReview() {
-    }
-
-    public ProductReview(String id, String review, Date reviewDate, String productId, String userId) {
-        this.id = id;
-        this.review = review;
-        this.reviewDate = reviewDate;
-        this.productId = productId;
-        this.userId = userId;
-    }
 
     public String getId() {
         return id;

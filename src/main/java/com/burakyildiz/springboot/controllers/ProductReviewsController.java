@@ -1,6 +1,9 @@
 package com.burakyildiz.springboot.controllers;
 
+import com.burakyildiz.springboot.dto.ProductReviewDto;
 import com.burakyildiz.springboot.entities.ProductReview;
+import com.burakyildiz.springboot.exceptions.ProductReviewNotFoundException;
+import com.burakyildiz.springboot.mapper.ProductReviewMapper;
 import com.burakyildiz.springboot.services.ProductReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +18,21 @@ public class ProductReviewsController {
     @Autowired
     private ProductReviewService productReviewService;
 
-    @GetMapping("/")
-    public List<ProductReview> findAll() {
-        return productReviewService.findAll();
+    @GetMapping("")
+    public List<ProductReviewDto> findAll() {
+        List<ProductReview> productReviewList = productReviewService.findAll();
+
+        //Sistemde hiç yorum yoksa
+        if (productReviewList.size() == 0) {
+            throw new ProductReviewNotFoundException("There are no review!");
+        }
+
+        List<ProductReviewDto> reviewDtoList = ProductReviewMapper.INSTANCE.convertAllReviewListToReviewDtoList(productReviewList);
+
+        return reviewDtoList;
     }
+
+
 
     @GetMapping("/{id}")
     public ProductReview findById(@PathVariable String id) {
