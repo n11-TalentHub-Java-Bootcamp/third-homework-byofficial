@@ -14,11 +14,11 @@ public interface ProductMapper {
 
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    @Mapping(target = "productName", source = "name")
+    @Mapping(target = "productName", source = "productName")
     @Mapping(target = "productPrice", source = "price")
     ProductDetailDto convertProductToProductDetailDto(Product product);
 
-    @Mapping(target = "productName", source = "name")
+    @Mapping(target = "productName", source = "productName")
     @Mapping(target = "productPrice", source = "price")
     List<ProductDetailDto> convertAllProductListToProductDetailDtoList(List<Product> product);
 

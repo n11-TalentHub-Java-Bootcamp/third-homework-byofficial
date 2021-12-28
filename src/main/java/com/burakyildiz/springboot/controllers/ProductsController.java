@@ -2,6 +2,7 @@ package com.burakyildiz.springboot.controllers;
 
 import com.burakyildiz.springboot.dto.ProductDetailDto;
 import com.burakyildiz.springboot.entities.Product;
+import com.burakyildiz.springboot.exceptions.ProductNotFoundException;
 import com.burakyildiz.springboot.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,12 @@ public class ProductsController {
 
     @GetMapping("/")
     public List<Product> findAll() {
+        List<Product> productList = productService.findAll();
+
+        //Sistemde hiç ürün yoksa
+        if (productList.size() == 0) {
+            throw new ProductNotFoundException("There are no product!");
+        }
         return productService.findAll();
     }
 
